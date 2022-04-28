@@ -1,5 +1,27 @@
 'use strict';
 
+function hover (e) {
+		 
+	 e.addEventListener("mouseover", function( event ) {   
+		event.target.style.color = "rgb(59 210 171)";
+		e.addEventListener("mouseout", function( event ) {   
+			event.target.style.color = "rgb(17, 100, 102)";
+		 }, false);
+
+	 }, false);
+	 
+}
+function hoverbacgr (e) {
+	e.addEventListener("mouseover", function( event ) {   
+	  event.target.style.background = "rgb(59 210 171)"
+	}, false);
+
+	e.addEventListener("mouseout", function( event ) {   
+		event.target.style.background = "#ffcb9a";
+	 }, false);
+	
+}
+
 class Button {
 
 	constructor(kbd,params) {
@@ -10,6 +32,19 @@ class Button {
 
 		this.element=document.createElement("button");
 		this.element.classList.add('btn');
+		this.element.style.color   ="#2c3531" 
+		this.element.style.borderRadius  ="4px " 
+		this.element.style.background ="#ffcb9a"  
+		this.element.style.padding ="10px"
+		this.element.style.margin ="3px"
+		this.element.style.minWidth ="40px"
+		this.element.style.textAlign ="center"
+		this.element.style.cursor ="pointer"
+		this.element.style.fontSize ="18px"
+		this.element.style.fontWeight ="bold"
+
+		hoverbacgr(this.element) 
+	
 		if (this.action)
 			this.element.classList.add('btn-action');
 		else if (this.ch && this.ch==" ")
@@ -100,16 +135,43 @@ class Keyboard {
 			textarea:document.createElement("textarea"),
 			btns:document.createElement("div"),
 		}
-		this.dom.container.classList.add('container');
+		// this.dom.container.classList.add('container');
 		this.dom.textarea.classList.add('textarea');
 		this.dom.textarea.setAttribute('autofocus',1);
 		this.dom.btns.classList.add('btns');
+
+
+// working on styles
+		this.dom.container.style.maxWidth = "800px" 
+		this.dom.container.style.padding = "20px"
+		this.dom.container.style.margin = "auto"
+
+		this.dom.btns.style.background  ="rgb(17, 100, 102)" 
+		this.dom.btns.style.border  ="3px solid black" 
+		this.dom.btns.style.borderRadius  ="4px " 
+		this.dom.btns.style.padding ="5px 10px"
+
+
+		this.dom.textarea.style.padding ="5px 10px"
+		this.dom.textarea.style.background  ="rgb(209, 232, 226)" 
+		this.dom.textarea.style.color   ="rgb(17, 100, 102)" 
+		this.dom.textarea.style.display ="block"
+		this.dom.textarea.style.width ="100%"
+		this.dom.textarea.style.height ="20vh"
+		this.dom.textarea.style.borderRadius  ="4px " 
+		this.dom.textarea.style.fontSize ="18px"
+		this.dom.textarea.style.fontWeight ="bold"
+
 
 		this.btns={};
 
 		cfg.btns.forEach(r=>{
 			let row=document.createElement("div");
-			row.classList.add('btns-row');
+			
+			row.style.margin = "0 -3px"
+			row.style.display = "flex"
+			row.style.justifyContent = 'stretch'
+
 			r.forEach(b=>{
 				let button=new Button(this,b);
 				this.btns[button.code]=button;
@@ -204,10 +266,20 @@ let state={
 };
 
 const keyboard=new Keyboard(kbCfg,state);
+let h1= document.createElement("h1");
+h1.style.color = "rgb(17, 100, 102)";
+h1.innerHTML = "RSS Виртуальная клавиатура";
+h1.style.textAlign="center";
 
 let p=document.createElement('p');
 p.innerHTML='Клавиатура создана в операционной системе Windows<br>Для переключения языка комбинация: левыe ctrl и alt';
 p.style.textAlign="center";
+p.style.color = "rgb(17, 100, 102)";
+keyboard.dom.container.appendChild(h1);
 keyboard.dom.container.appendChild(p);
 
-
+// document.h1[0].insertRule('h1:hover{color:red}', 0); 
+var test = document.getElementById("test");
+  
+  
+hover (h1) 
